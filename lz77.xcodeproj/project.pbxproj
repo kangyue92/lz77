@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0980AFB81714529C00B528A0 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0980AFB71714529C00B528A0 /* main.c */; };
 		0980AFBA1714529C00B528A0 /* lz77.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0980AFB91714529C00B528A0 /* lz77.1 */; };
+		0980AFC1171452E000B528A0 /* BITIO.c in Sources */ = {isa = PBXBuildFile; fileRef = 0980AFC0171452E000B528A0 /* BITIO.c */; };
+		0980AFC31714530400B528A0 /* lz77.c in Sources */ = {isa = PBXBuildFile; fileRef = 0980AFC21714530400B528A0 /* lz77.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		0980AFB41714529C00B528A0 /* lz77 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lz77; sourceTree = BUILT_PRODUCTS_DIR; };
 		0980AFB71714529C00B528A0 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0980AFB91714529C00B528A0 /* lz77.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = lz77.1; sourceTree = "<group>"; };
+		0980AFC0171452E000B528A0 /* BITIO.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BITIO.c; sourceTree = "<group>"; };
+		0980AFC21714530400B528A0 /* lz77.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lz77.c; sourceTree = "<group>"; };
+		0980AFC41714532100B528A0 /* BITIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BITIO.h; sourceTree = "<group>"; };
+		0980AFC51714533400B528A0 /* lz77.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lz77.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				0980AFB71714529C00B528A0 /* main.c */,
+				0980AFC41714532100B528A0 /* BITIO.h */,
+				0980AFC51714533400B528A0 /* lz77.h */,
+				0980AFC0171452E000B528A0 /* BITIO.c */,
+				0980AFC21714530400B528A0 /* lz77.c */,
 				0980AFB91714529C00B528A0 /* lz77.1 */,
 			);
 			path = lz77;
@@ -118,6 +128,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0980AFB81714529C00B528A0 /* main.c in Sources */,
+				0980AFC1171452E000B528A0 /* BITIO.c in Sources */,
+				0980AFC31714530400B528A0 /* lz77.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

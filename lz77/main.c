@@ -7,12 +7,9 @@
 //
 
 #include <stdio.h>
+#include "lz77.h"
 
-int main(int argc, const char * argv[])
+int main()
 {
-
-    // insert code here...
-    printf("Hello, World!\n");
-    return 0;
+    testLZ77();
 }
-
