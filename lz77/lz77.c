@@ -1,23 +1,5 @@
-//
-//  lz77.c
-//  lz77
-//
-//  Created by kangyue on 13-4-9.
-//  Copyright (c) 2013年 zhangyali. All rights reserved.
-//
-
 #include <stdio.h>
-/*
- * 源代码的思路参考自 Mark Nelson 所著的<<数据压缩技术原理与范例>>
- * 中的第八章"滑动窗口压缩"，是lz77算法的一种简介直观的实现，但是由于
- * 没有采用如LZSS算法中的二叉搜索树技术，所以在运行速度上不如LZSS算法。
- * 采用了微量缓冲区buf 以加快执行速度。
- *
- * created by chenyong 2008.03.03
- */
-
 #include "lz77.h"
-
 #include <memory.h>
 
 void CompressFile(FILE * inputFile, BITFILE * outputFile)
@@ -32,7 +14,7 @@ void CompressFile(FILE * inputFile, BITFILE * outputFile)
     int match_pos;
     int delta;
     
-    //initialize window.
+    //初始化窗口
     memset(window, 0, WINDOW_SIZE * sizeof(unsigned char));
     
     current_pos = 1;
@@ -41,7 +23,6 @@ void CompressFile(FILE * inputFile, BITFILE * outputFile)
         c = getc(inputFile);
         if (EOF == c)
             break;
-        
         window[current_pos + i] = (unsigned char)c;
     }
     
@@ -65,8 +46,7 @@ void CompressFile(FILE * inputFile, BITFILE * outputFile)
             replace_count = match_length;
             OutputBit(outputFile, 0);
             OutputBits(outputFile, (unsigned long)match_pos, INDEX_BIT_COUNT);
-            OutputBits(outputFile, (unsigned long)(match_length - BREAK_EVEN - 1),
-                       LENGTH_BIT_COUNT);
+            OutputBits(outputFile, (unsigned long)(match_length - BREAK_EVEN - 1),LENGTH_BIT_COUNT);
         }
         
         for (i = 0; i < replace_count; i++)
@@ -81,7 +61,7 @@ void CompressFile(FILE * inputFile, BITFILE * outputFile)
         
         if (look_ahead_bytes)
         {
-            //copy [current_pos, current_pos + 16] to buf.
+            //将[current_pos, current_pos + 16]存到buf里.
             for (i = 0; i < LOOK_AHEAD_SIZE; i++)
                 buf[i] = window[MOD_WINDOW(current_pos + i)];
             
@@ -120,7 +100,7 @@ void ExpandFile(BITFILE * inputFile, FILE * outputFile)
     int match_length;
     int match_pos;
     
-    //initialize window.
+    //初始化窗口
     memset(window, 0, WINDOW_SIZE * sizeof(unsigned char));
     
     current_pos = 1;
@@ -151,25 +131,4 @@ void ExpandFile(BITFILE * inputFile, FILE * outputFile)
             }
         }
     }
-}
-
-void testLZ77()
-{
-    FILE * pFile;
-    BITFILE * pOutputBitFile;
-    BITFILE * pInputBitFile;
-    
-    pFile = fopen("test.txt","rb");
-    pOutputBitFile = OpenOutputBitFile("output.txt");
-    CompressFile(pFile, pOutputBitFile);
-    
-    fclose(pFile);
-    CloseOutputBitFile(pOutputBitFile);  // compress completed.
-    
-    pInputBitFile = OpenInputBitFile("output.txt");
-    pFile = fopen("test_expand.txt","wb");
-    ExpandFile(pInputBitFile, pFile);
-    
-    fclose(pFile);
-    CloseInputBitFile(pInputBitFile);   //expand completed.
 }

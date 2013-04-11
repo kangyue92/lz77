@@ -1,11 +1,3 @@
-//
-//  lz77.h
-//  lz77
-//
-//  Created by kangyue on 13-4-9.
-//  Copyright (c) 2013年 zhangyali. All rights reserved.
-//
-
 #ifndef lz77_lz77_h
 #define lz77_lz77_h
 
@@ -28,7 +20,5 @@ unsigned char buf[LOOK_AHEAD_SIZE];
 
 void CompressFile(FILE * inputFile, BITFILE * outputFile);
 void ExpandFile(BITFILE * inputFile, FILE * outputFile);
-
-void testLZ77();
 
 #endif
