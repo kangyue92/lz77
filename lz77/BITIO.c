@@ -160,59 +160,59 @@ void CloseInputBitFile(BITFILE * pBitFile)
     free((void *)pBitFile);
 }
 
-void FilePrintBinary(FILE * file, unsigned int code, int bits)
-{
-    unsigned int mask;
-    
-    mask = 1 << (bits - 1);
-    while (mask != 0)
-    {
-        if (code & mask)
-            fputc('1', file);
-        else
-            fputc('0', file);
-        
-        mask >>= 1;
-    }
-}
-
-void PrintInBinary(BITFILE * pBitFile)
-{
-    int value;
-    int count;
-    
-    count = 0;
-    while (1)
-    {
-        if (pBitFile->mask == 0x80)
-        {
-            count++;
-            pBitFile->rack = getc(pBitFile->bitfile);
-            if (pBitFile->rack == EOF)
-                break;
-        }
-        
-        value = pBitFile->rack & pBitFile->mask;
-        if (value)
-            fputc('1', stdout);
-        else
-            fputc('0', stdout);
-        
-        pBitFile->mask >>= 1;
-        if (pBitFile->mask == 0)
-        {
-            pBitFile->mask = 0x80;
-            fputc(' ', stdout);
-            fputc(' ', stdout);
-            if (count == 4)
-            {
-                fputc('\n', stdout);
-                count = 0;
-            }
-        }
-    }
-    printf("\n");
-}
-
+//void FilePrintBinary(FILE * file, unsigned int code, int bits)
+//{
+//    unsigned int mask;
+//    
+//    mask = 1 << (bits - 1);
+//    while (mask != 0)
+//    {
+//        if (code & mask)
+//            fputc('1', file);
+//        else
+//            fputc('0', file);
+//        
+//        mask >>= 1;
+//    }
+//}
+//
+//void PrintInBinary(BITFILE * pBitFile)
+//{
+//    int value;
+//    int count;
+//    
+//    count = 0;
+//    while (1)
+//    {
+//        if (pBitFile->mask == 0x80)
+//        {
+//            count++;
+//            pBitFile->rack = getc(pBitFile->bitfile);
+//            if (pBitFile->rack == EOF)
+//                break;
+//        }
+//        
+//        value = pBitFile->rack & pBitFile->mask;
+//        if (value)
+//            fputc('1', stdout);
+//        else
+//            fputc('0', stdout);
+//        
+//        pBitFile->mask >>= 1;
+//        if (pBitFile->mask == 0)
+//        {
+//            pBitFile->mask = 0x80;
+//            fputc(' ', stdout);
+//            fputc(' ', stdout);
+//            if (count == 4)
+//            {
+//                fputc('\n', stdout);
+//                count = 0;
+//            }
+//        }
+//    }
+//    printf("\n");
+//}
+//
 
 

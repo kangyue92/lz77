@@ -4,7 +4,7 @@
 
 void CompressFile(FILE * inputFile, BITFILE * outputFile)
 {
-    int i;
+    int i;  //循环变量
     int j;
     int c;
     int look_ahead_bytes;
@@ -12,7 +12,7 @@ void CompressFile(FILE * inputFile, BITFILE * outputFile)
     int replace_count;
     int match_length;
     int match_pos;
-    int delta;
+    int flag;
     
     //初始化窗口
     memset(window, 0, WINDOW_SIZE * sizeof(unsigned char));
@@ -76,8 +76,8 @@ void CompressFile(FILE * inputFile, BITFILE * outputFile)
                 
                 for (j = 0; j < LOOK_AHEAD_SIZE; j++)
                 {
-                    delta = window[MOD_WINDOW(i + j)] - buf[j];
-                    if (0 != delta)
+                    flag = window[MOD_WINDOW(i + j)] - buf[j];
+                    if (0 != flag)
                         break;
                 }
                 if (j >= match_length)
